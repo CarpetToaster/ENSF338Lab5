@@ -29,7 +29,6 @@ class CalculatorStack:
             return None
         
 
-
 # TESTING STACK IMPLEMENTATION
 '''
 test = CalculatorStack(Node(15))
@@ -53,5 +52,42 @@ while pointer != None:
 print("****************")
 print(test.peek())
 '''
+ops = ['(', ')', '+', '-', '*', '/']
+
+def add(a, b):
+    return a + b
+
+def sub(a, b):
+    return a - b
+
+def mul(a, b):
+    return a*b
+
+def div(a, b):
+    if b != 0:
+        return a/b
+    
+doOp = {
+    "+": add,
+    "-": sub,
+    "*": mul,
+    "/": div
+}
+
+def main():
+    operatorStack = CalculatorStack()
+    numericStack = CalculatorStack()
+    expression = input("Input a valid expression: ")
+    
+    for char in expression:
+        if char in ops:
+            operatorStack.push(char)
+            expression = expression.replace(char, '')
+            
+    numberTokens = expression.split(" ")
+    for token in numberTokens:
+        numericStack.push(token)
 
 
+main()
+        
