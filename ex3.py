@@ -88,17 +88,18 @@ linkedTimes = []
 
 trials = 100
 tasks = 10000
+timeitNumber = 25
 taskList = randomTasks(tasks)
 
 for i in range(trials):
     randomTasks(tasks)
-    arrayTime = timeit.timeit("performTaskList(taskList, 'ArrayStack')", globals = globals(), number = 25)
-    linkedTime = timeit.timeit("performTaskList(taskList, 'LinkedStack')", globals = globals(), number = 25)
-    arrayTimes.append(arrayTime)
-    linkedTimes.append(linkedTime)
+    arrayTime = timeit.timeit("performTaskList(taskList, 'ArrayStack')", globals = globals(), number = timeitNumber)
+    linkedTime = timeit.timeit("performTaskList(taskList, 'LinkedStack')", globals = globals(), number = timeitNumber)
+    arrayTimes.append(arrayTime/timeitNumber)
+    linkedTimes.append(linkedTime/timeitNumber)
 
-print(arrayTimes)
-print(linkedTimes)
+print(f'The average time to run the Array implementation was {sum(arrayTimes)/trials}, minimum time was {min(arrayTimes)}, maximum time was {max(arrayTimes)}')
+print(f'The average time to run the Linked list implementation was {sum(linkedTimes)/trials}, minimum time was {min(linkedTimes)}, maximum time was {max(linkedTimes)}')
 
 # Part 5
 x = range(len(arrayTimes))
