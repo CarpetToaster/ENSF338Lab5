@@ -121,6 +121,7 @@ def performTaskList(taskList, queueType):
 
 tasks = 10000
 trials = 100
+timeitNumber = 5
 taskList = randomTasks(tasks)
 
 arrayTimes = []
@@ -128,13 +129,13 @@ linkedTimes = []
 
 for i in range(trials):
     randomTasks(tasks)
-    arrayTime = timeit.timeit("performTaskList(taskList, 'ArrayQueue')", globals = globals(), number = 5)
-    linkedTime = timeit.timeit("performTaskList(taskList, 'LinkedQueue')", globals = globals(), number = 5)
-    arrayTimes.append(arrayTime)
-    linkedTimes.append(linkedTime)
+    arrayTime = timeit.timeit("performTaskList(taskList, 'ArrayQueue')", globals = globals(), number = timeitNumber)
+    linkedTime = timeit.timeit("performTaskList(taskList, 'LinkedQueue')", globals = globals(), number = timeitNumber)
+    arrayTimes.append(arrayTime/ timeitNumber)
+    linkedTimes.append(linkedTime/ timeitNumber)
 
-print(arrayTimes)
-print(linkedTimes)
+print(f'The average time for the Array implementation was {sum(arrayTimes)/ timeitNumber}, the minimum time was {min(arrayTimes)}, the maximum time was {max(arrayTimes)}')
+print(f'The average time for the Linked list implementation was {sum(linkedTimes)/ timeitNumber}, the minimum time was {min(linkedTimes)}, the maximum time was {max(linkedTimes)}')
 
 # Part 5
 x = range(len(arrayTimes))
